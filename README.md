@@ -1,28 +1,35 @@
-# LabNet - SaaS Multi-Tenant Showcase (CodelyTV Modular DDD Architecture)
+# LabNet - Enterprise Multi-Tenant SaaS Showcase
 
-Enterprise-grade MVP demonstrating **Modular Bounded Contexts (CodelyTV style)**, **Domain-Driven Design (DDD)**, **Multi-Tenancy Isolation**, and **End-to-End Type Safety** across **.NET (ASP.NET Core + EF Core)** and **Vue 3 + TypeScript**.
+[![.NET 10](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
+[![Vue 3](https://img.shields.io/badge/Vue.js-3.x-4FC08D?logo=vuedotjs)](https://vuejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript)](https://www.typescriptlang.org/)
+[![SQL Server 2022](https://img.shields.io/badge/SQL_Server-2022-CC292B?logo=microsoftsqlserver)](https://www.microsoft.com/sql-server)
+[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker)](https://www.docker.com/)
+[![Architecture](https://img.shields.io/badge/Architecture-Modular_DDD_%2F_CodelyTV-orange)](https://codely.com/)
+
+Enterprise-grade SaaS showcase applying **Modular Domain-Driven Design (DDD) & Screaming Architecture (CodelyTV style)**, **Single Action Controllers (REPR Pattern)**, **Database Multi-Tenancy Isolation**, and **End-to-End Type Safety** across **.NET (ASP.NET Core + EF Core)** and **Vue 3 + TypeScript**.
 
 Fully dockerized with **Microsoft SQL Server 2022**.
 
 ---
 
-## 📋 Guía de Respuestas para la Entrevista (Para Juan)
+## 📋 Guía de Respuestas para la Entrevista (Atenea Conocimientos)
 
-Copiá o adaptá estos puntos para responder el correo técnico con total autoridad y transparencia:
+Respuestas técnicas con fundamento arquitectónico y evidencia en código:
 
 ### 1. ¿Cómo describirías tu nivel actual de inglés conversacional?
-> *(Completá con tu nivel real, ej: B2/C1 profesional, capaz de mantener reuniones técnicas de diseño y standups sin inconvenientes).*
+> *(Completá con tu nivel real, ej: B2 profesional, capaz de coordinar requerimientos técnicos, participar en ceremonias ágiles y redactar documentación de arquitectura sin barreras).*
 
 ### 2. ¿Tenés experiencia con C#/.NET y ASP.NET Core? ¿En qué proyectos y qué tareas realizaste?
-> *"Vengo con un sólido background en desarrollo backend con tipado estricto y diseño empresarial (DDD, Bounded Contexts, Hexagonal Architecture, SOLID). La curva hacia C# y .NET es inmediata porque los conceptos de modelado de dominio y desacoplamiento son agnósticos al lenguaje.*
+> *"Cuento con un background consolidado en desarrollo backend con tipado estricto y diseño empresarial (DDD, Bounded Contexts, Hexagonal Architecture, SOLID). La curva hacia C# y .NET es inmediata porque los conceptos de modelado de dominio, encapsulamiento y patrones son agnósticos al lenguaje.*
 >
-> *Para demostrarlo con código en mano, construí un MVP funcional (**LabNet**) estructurado bajo la arquitectura modular por Bounded Contexts de CodelyTV (Contexts: Shared, Auth, Projects; Apps: WebApi). Cada contexto encapsula su propio Domain, Application e Infrastructure, con middlewares para excepciones (RFC 7807), resolución multi-tenant, seguridad JWT y tests unitarios con xUnit, FluentAssertions y Moq."*
+> *Para demostrarlo con código en mano, construí un MVP funcional (**LabNet**) estructurado bajo la arquitectura modular por Bounded Contexts de CodelyTV (Contexts: Shared, Auth, Projects; Apps: WebApi). Implementé **Single Action Controllers (REPR)**, middlewares para excepciones (RFC 7807), resolución multi-tenant, seguridad JWT y suite de tests unitarios con xUnit, FluentAssertions y Moq."*
 
 ### 3. ¿Trabajaste con Vue.js y TypeScript juntos?
 > *"Sí. En el frontend trabajo con Vue 3 (Composition API) junto a TypeScript estricto, aplicando la misma arquitectura modular por Bounded Contexts / Features (prácticas CodelyTV). Separo la capa de dominio/entidades, casos de uso (Application), repositorios HTTP (Infrastructure) y componentes UI/Pinia. El proyecto incluye suite de tests unitarios ejecutados con Vitest y @vue/test-utils."*
 
 ### 4. ¿Qué experiencia tenés con SQL Server y Entity Framework Core?
-> *"Utilizo Entity Framework Core con enfoque Code-First conectado a SQL Server en contenedores Docker. En el proyecto implementé modelado relacional, Fluent API, Change Tracking, Unit of Work y **Global Query Filters** (`HasQueryFilter`) para aislamiento automático de datos multi-tenant a nivel de consulta LINQ, garantizando que ninguna consulta filtre datos entre organizaciones distintas. Además, cuenta con inicializadores/seeders automáticos con hash seguro de contraseñas (BCrypt)."*
+> *"Utilizo Entity Framework Core con enfoque Code-First conectado a SQL Server 2022 en contenedores Docker. En el proyecto implementé modelado relacional, Fluent API, Change Tracking, Unit of Work y **Global Query Filters** (`HasQueryFilter`) para aislamiento automático de datos multi-tenant a nivel de consulta LINQ, garantizando que ninguna consulta filtre datos entre organizaciones distintas. Además, cuenta con inicializadores/seeders automáticos con hash seguro de contraseñas (BCrypt)."*
 
 ---
 
@@ -49,7 +56,12 @@ backend/src/
 │       └── Infrastructure/   # ProjectRepository (EF Core)
 │
 └── Apps/
-    └── LabNet.WebApi/        # Punto de entrada HTTP (Controllers, Middlewares, AppDbContext)
+    └── LabNet.WebApi/        # Punto de entrada HTTP
+        ├── Controllers/      # Single Action Controllers (un controller por acción HTTP)
+        │   ├── Auth/         # LoginPostController, TenantsGetController, MeGetController
+        │   └── Projects/     # ProjectsGetController, ProjectGetByIdController, etc.
+        ├── Middlewares/      # ExceptionHandlingMiddleware (RFC 7807), TenantResolutionMiddleware
+        └── Persistence/      # AppDbContext (EF Core con Global Query Filters) y DbInitializer (Seeders)
 ```
 
 ### Frontend (Vue 3 + TypeScript)
