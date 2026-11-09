@@ -11,25 +11,6 @@ Enterprise-grade SaaS showcase applying **Modular Domain-Driven Design (DDD) & S
 
 Fully dockerized with **Microsoft SQL Server 2022**.
 
----
-
-## 📋 Guía de Respuestas para la Entrevista (Atenea Conocimientos)
-
-Respuestas técnicas con fundamento arquitectónico y evidencia en código:
-
-### 1. ¿Cómo describirías tu nivel actual de inglés conversacional?
-> *(Completá con tu nivel real, ej: B2 profesional, capaz de coordinar requerimientos técnicos, participar en ceremonias ágiles y redactar documentación de arquitectura sin barreras).*
-
-### 2. ¿Tenés experiencia con C#/.NET y ASP.NET Core? ¿En qué proyectos y qué tareas realizaste?
-> *"Cuento con un background consolidado en desarrollo backend con tipado estricto y diseño empresarial (DDD, Bounded Contexts, Hexagonal Architecture, SOLID). La curva hacia C# y .NET es inmediata porque los conceptos de modelado de dominio, encapsulamiento y patrones son agnósticos al lenguaje.*
->
-> *Para demostrarlo con código en mano, construí un MVP funcional (**LabNet**) estructurado bajo la arquitectura modular por Bounded Contexts de CodelyTV (Contexts: Shared, Auth, Projects; Apps: WebApi). Implementé **Single Action Controllers (REPR)**, middlewares para excepciones (RFC 7807), resolución multi-tenant, seguridad JWT y suite de tests unitarios con xUnit, FluentAssertions y Moq."*
-
-### 3. ¿Trabajaste con Vue.js y TypeScript juntos?
-> *"Sí. En el frontend trabajo con Vue 3 (Composition API) junto a TypeScript estricto, aplicando la misma arquitectura modular por Bounded Contexts / Features (prácticas CodelyTV). Separo la capa de dominio/entidades, casos de uso (Application), repositorios HTTP (Infrastructure) y componentes UI/Pinia. El proyecto incluye suite de tests unitarios ejecutados con Vitest y @vue/test-utils."*
-
-### 4. ¿Qué experiencia tenés con SQL Server y Entity Framework Core?
-> *"Utilizo Entity Framework Core con enfoque Code-First conectado a SQL Server 2022 en contenedores Docker. En el proyecto implementé modelado relacional, Fluent API, Change Tracking, Unit of Work y **Global Query Filters** (`HasQueryFilter`) para aislamiento automático de datos multi-tenant a nivel de consulta LINQ, garantizando que ninguna consulta filtre datos entre organizaciones distintas. Además, cuenta con inicializadores/seeders automáticos con hash seguro de contraseñas (BCrypt)."*
 
 ---
 
