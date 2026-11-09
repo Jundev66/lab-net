@@ -21,8 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\LabNet.Application\LabNet.Application.csproj" />
-    <ProjectReference Include="..\..\src\LabNet.Domain\LabNet.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Contexts\Shared\LabNet.Shared.csproj" />
+    <ProjectReference Include="..\..\src\Contexts\Auth\LabNet.Auth.csproj" />
+    <ProjectReference Include="..\..\src\Contexts\Projects\LabNet.Projects.csproj" />
   </ItemGroup>
 
 </Project>

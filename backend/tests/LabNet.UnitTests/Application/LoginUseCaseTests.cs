@@ -1,10 +1,10 @@
 using FluentAssertions;
-using LabNet.Application.Auth.DTOs;
-using LabNet.Application.Auth.UseCases;
-using LabNet.Application.Common.Interfaces;
-using LabNet.Domain.Common.Exceptions;
-using LabNet.Domain.Entities;
-using LabNet.Domain.Interfaces;
+using LabNet.Auth.Application.DTOs;
+using LabNet.Auth.Application.Interfaces;
+using LabNet.Auth.Application.UseCases;
+using LabNet.Auth.Domain;
+using LabNet.Shared.Domain.Exceptions;
+using LabNet.Shared.Domain.Interfaces;
 using Moq;
 using Xunit;
 
@@ -34,7 +34,6 @@ public class LoginUseCaseTests
     [Fact]
     public async Task ExecuteAsync_WithValidCredentials_ShouldReturnLoginResponse()
     {
-        // Arrange
         var tenant = new Tenant("Acme Corp", "acme");
         var user = new User(tenant.Id, "admin@acme.com", "hashed_password", "Admin User", "Admin");
 
@@ -52,10 +51,8 @@ public class LoginUseCaseTests
 
         var request = new LoginRequest("acme", "admin@acme.com", "CorrectPassword123!");
 
-        // Act
         var result = await _useCase.ExecuteAsync(request);
 
-        // Assert
         result.Should().NotBeNull();
         result.Token.Should().Be("fake_jwt_token");
         result.TenantIdentifier.Should().Be("acme");
@@ -66,16 +63,13 @@ public class LoginUseCaseTests
     [Fact]
     public async Task ExecuteAsync_WithUnknownTenant_ShouldThrowDomainException()
     {
-        // Arrange
         _tenantRepoMock.Setup(r => r.GetByIdentifierAsync("unknown", It.IsAny<CancellationToken>()))
             .ReturnsAsync((Tenant?)null);
 
         var request = new LoginRequest("unknown", "admin@unknown.com", "Password123!");
 
-        // Act
         var action = () => _useCase.ExecuteAsync(request);
 
-        // Assert
         await action.Should().ThrowAsync<DomainException>()
             .WithMessage("Invalid tenant or tenant is inactive.");
     }
@@ -83,7 +77,6 @@ public class LoginUseCaseTests
     [Fact]
     public async Task ExecuteAsync_WithWrongPassword_ShouldThrowDomainException()
     {
-        // Arrange
         var tenant = new Tenant("Acme Corp", "acme");
         var user = new User(tenant.Id, "admin@acme.com", "hashed_password", "Admin User", "Admin");
 
@@ -98,10 +91,8 @@ public class LoginUseCaseTests
 
         var request = new LoginRequest("acme", "admin@acme.com", "WrongPassword");
 
-        // Act
         var action = () => _useCase.ExecuteAsync(request);
 
-        // Assert
         await action.Should().ThrowAsync<DomainException>()
             .WithMessage("Invalid credentials.");
     }

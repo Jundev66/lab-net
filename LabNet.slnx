@@ -1,10 +1,18 @@
 <Solution>
   <Folder Name="/backend/" />
-  <Folder Name="/backend/src/">
-    <Project Path="backend/src/LabNet.Application/LabNet.Application.csproj" />
-    <Project Path="backend/src/LabNet.Domain/LabNet.Domain.csproj" />
-    <Project Path="backend/src/LabNet.Infrastructure/LabNet.Infrastructure.csproj" />
-    <Project Path="backend/src/LabNet.WebApi/LabNet.WebApi.csproj" />
+  <Folder Name="/backend/src/" />
+  <Folder Name="/backend/src/Apps/">
+    <Project Path="backend/src/Apps/LabNet.WebApi/LabNet.WebApi.csproj" />
+  </Folder>
+  <Folder Name="/backend/src/Contexts/" />
+  <Folder Name="/backend/src/Contexts/Auth/">
+    <Project Path="backend/src/Contexts/Auth/LabNet.Auth.csproj" />
+  </Folder>
+  <Folder Name="/backend/src/Contexts/Projects/">
+    <Project Path="backend/src/Contexts/Projects/LabNet.Projects.csproj" />
+  </Folder>
+  <Folder Name="/backend/src/Contexts/Shared/">
+    <Project Path="backend/src/Contexts/Shared/LabNet.Shared.csproj" />
   </Folder>
   <Folder Name="/backend/tests/">
     <Project Path="backend/tests/LabNet.UnitTests/LabNet.UnitTests.csproj" />
