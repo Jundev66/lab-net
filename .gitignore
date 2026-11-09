@@ -1,0 +1,20 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+
+## Node & Frontend
+node_modules/
+dist/
+.tmp/
+*.local
+npm-debug.log*
+
+## IDE & OS
+.idea/
+.vscode/
+Thumbs.db
+[Dd]esktop.ini
+*.swp
